@@ -38,6 +38,9 @@
     align-items: center;
     justify-content: space-around;
 }
+.container__right{
+    width: 65%;
+}
 .score_box{
     background-color: #fff;
     padding: 30px;
@@ -63,5 +66,43 @@
 #card-type{
     font-size: 1rem;
 }
+.card-box__container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.3rem;
+}
+.card-versus__container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.2rem;
+    height: 300px;
+    margin-top: 2rem;
+}
+.versus-top, .versus-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.versus-bottom{
+    margin-top: 1rem;
+}
+#next-duel{
+    display: none;
+}
+.card-box{
+    height: 9rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.card-infield{
+    height: 11.2rem;
+    width: 8rem;
+    
+    border-radius: 8px;
+}
 
-/* finalizando container left */
