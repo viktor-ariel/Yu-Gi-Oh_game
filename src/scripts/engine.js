@@ -13,6 +13,13 @@ const state= {
         player: document.getElementById("player-fiel-card"),
         computer: document.getElementById("computer-fiel-card"),
     },
+    playerSide : {
+    player1: "player-cards",
+    player1BOX: document.querySelector("#computer-cards"),
+    computer: "computer-cards",
+    computerBOX: document.querySelector("#player-cards"),
+    
+},
     actions:{
         button: document.getElementById("next-duel"),
     },
@@ -83,14 +90,47 @@ async function setCardsField(cardId){
     state.fieldCards.player.style.display = "block";
     state.fieldCards.computer.style.display = "block";
 
-    state.fieldCards.player.src = cardData[cardId];
-    state.fieldCards.computer.src = cardData[computerCardId];
+    state.fieldCards.player.src = cardData[cardId].img;
+    state.fieldCards.computer.src = cardData[computerCardId].img;
 
     let duelResults = await checkDuelResults(cardId, computerCardId);
 
     await updateScore();
     await drawButton(duelResults);
 
+}
+
+async function updateScore(){
+    state.score.scoreBox.innerText = `Win ${state.score.playerScore} | Lose: ${state.score.computerScore}`
+}
+
+async function drawButton(text){
+    state.actions.button.innerText = text;
+    state.actions.button.style.display = "block";
+}
+
+async function checkDuelResults(playerCardId, computerCardId){
+    let duelResults = "Empate";
+    let playerCard = cardData[playerCardId];
+
+    if(playerCard.WinOf.includes(computerCardId)){
+        duelResults = "Ganhou";
+        state.score.playerScore++;
+    }
+     if(playerCard.LoseOf.includes(computerCardId)){
+        duelResults = "Perdeu";
+        state.score.computerScore++;
+    }
+    return duelResults;
+}
+
+async function removeAllcardsImages() {
+    let {computerBOX, player1BOX } = state.playerSide;
+    let imgElements = computerBOX.querySelectorAll("img");
+    imgElements.forEach((img)=> img.remove());
+
+    imgElements = player1BOX.querySelectorAll("img");
+    imgElements.forEach((img)=> img.remove());
 }
 
 async function drawSelectCard(index){
